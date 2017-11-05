@@ -34,6 +34,11 @@ public class Money implements Expression {
         return new Sum(this, added);
     }
 
+    public Money reduce(Bank bank, String to) {
+        int rate = bank.rate(currency, to);
+        return new Money(amount / rate, to);
+    }
+
     @Override
     public boolean equals(Object object){
         Money money = (Money) object;
