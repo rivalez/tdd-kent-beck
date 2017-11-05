@@ -3,7 +3,7 @@ package com.tabor.money;
 /**
  * Created by marek on 04.11.2017.
  */
-public class Money {
+public class Money implements Expression {
 
     protected int amount;
 
@@ -30,8 +30,8 @@ public class Money {
         return new Money(amount * multiplier, currency);
     }
 
-    Money plus(Money added){
-        return new Money(amount + added.amount, currency);
+    Sum plus(Money added){
+        return new Sum(this, added);
     }
 
     @Override
