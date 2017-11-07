@@ -1,12 +1,17 @@
 package com.tabor.pythonPart;
 
+import com.sun.security.ntlm.Server;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.net.Socket;
+import java.nio.Buffer;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static sun.net.ftp.FtpClient.defaultPort;
 
 /**
  * Created by marek on 06.11.2017.
