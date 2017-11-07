@@ -17,8 +17,7 @@ public class TestCase {
         this.name = methodName;
     }
 
-    TestResult run() {
-        TestResult result = new TestResult();
+    TestResult run(TestResult result) {
         result.testStarted();
         setUp();
         try {
