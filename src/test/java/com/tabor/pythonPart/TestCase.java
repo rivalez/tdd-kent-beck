@@ -6,13 +6,30 @@ package com.tabor.pythonPart;
 public class TestCase {
 
     boolean wasRun;
+    String name;
     String log;
 
-    TestResult run(){
+    TestCase() {
+        this.name = "";
+    }
+
+    TestCase(String methodName) {
+        this.name = methodName;
+    }
+
+    TestResult run() {
         TestResult result = new TestResult();
         result.testStarted();
         setUp();
-        testMethod();
+        try {
+            if (name.equals("testBrokenMethod")) {
+                testBrokenMethod();
+            } else {
+                testMethod();
+            }
+        } catch (Exception e) {
+            result.testFailed();
+        }
         tearDown();
         this.wasRun = Boolean.TRUE;
         return result;
@@ -23,12 +40,12 @@ public class TestCase {
         return Boolean.TRUE;
     }
 
-    void testMethod(){
+    void testMethod() {
         this.wasRun = Boolean.TRUE;
         this.log = log + "testMethod ";
     }
 
-    void tearDown(){
+    void tearDown() {
         this.log = log + "tearDown ";
     }
 

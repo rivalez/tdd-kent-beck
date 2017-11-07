@@ -20,12 +20,12 @@ public class PythonTest {
     }
 
     @Test
-    public void wasRun(){
+    public void wasRun() {
         assertFalse(test.wasRun);
     }
 
     @Test
-        public void testCaseTest(){
+    public void testCaseTest() {
         TestCase test = Mockito.mock(TestCase.class);
         Mockito.verify(test, Mockito.times(0)).run();
         test.run();
@@ -33,14 +33,14 @@ public class PythonTest {
     }
 
     @Test
-    public void testSetUp(){
+    public void testSetUp() {
         test.setUp();
         test.testMethod();
         assertTrue(test.log.equals("setUp testMethod "));
     }
 
     @Test
-    public void testTemplateMethod(){
+    public void testTemplateMethod() {
         test.testMethod();
         test.run();
         assertTrue(test.log.equals("setUp testMethod tearDown "));
@@ -55,8 +55,8 @@ public class PythonTest {
 
     @Test
     public void testFailedResult() throws Exception {
-        test.testBrokenMethod();
-        TestResult result = test.run();
+        TestCase testCase = new TestCase("testBrokenMethod");
+        TestResult result = testCase.run();
         assertTrue("1 run, 1 failed".equals(result.summary()));
     }
 
@@ -66,6 +66,5 @@ public class PythonTest {
         result.testStarted();
         result.testFailed();
         assertTrue("1 run, 1 failed".equals(result.summary()));
-        }
-
+    }
 }
