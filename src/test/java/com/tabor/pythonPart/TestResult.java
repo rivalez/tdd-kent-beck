@@ -1,6 +1,6 @@
 package com.tabor.pythonPart;
 
-public class TestResult {
+class TestResult {
 
     private int runCount;
     private int errorCount;

@@ -13,6 +13,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class PythonTest {
 
+    public static final String TEST_BROKEN_METHOD = "testBrokenMethod";
+    public static final String TEST_TEMPLATE_METHOD = "testTemplateMethod";
+    public static final String TEST_FAILED_RESULT_FORMATTING = "testFailedResultFormatting";
+    public static final String TEST_FAILED_RESULT = "testFailedResult";
+    public static final String TEST_SUITE = "testSuite";
     private TestCase test = new TestCase();
 
     @Before
@@ -43,9 +48,12 @@ public class PythonTest {
 
     @Test
     public void testTemplateMethod() {
-        test.testMethod();
+        //given
         TestResult result = new TestResult();
+        //when
+        test.testMethod();
         test.run(result);
+        //then
         assertTrue(test.log.equals("setUp testMethod tearDown "));
     }
 
@@ -63,7 +71,7 @@ public class PythonTest {
     @Test
     public void testFailedResult() throws Exception {
         TestResult result = new TestResult();
-        TestCase testCase = new TestCase("testBrokenMethod");
+        TestCase testCase = new TestCase(TEST_BROKEN_METHOD);
         result = testCase.run(result);
         assertTrue("1 run, 1 failed".equals(result.summary()));
     }
@@ -79,10 +87,13 @@ public class PythonTest {
     @Test
     public void testSuite(){
         TestSuite suite = new TestSuite();
-        suite.add(new TestCase("testTemplateMethod"));
-        suite.add(new TestCase("testBrokenMethod"));
+        suite.add(new TestCase(TEST_TEMPLATE_METHOD));
+        suite.add(new TestCase(TEST_BROKEN_METHOD));
+        suite.add(new TestCase(TEST_FAILED_RESULT_FORMATTING));
+        suite.add(new TestCase(TEST_FAILED_RESULT));
+        suite.add(new TestCase(TEST_SUITE));
         TestResult result = new TestResult();
         suite.run(result);
-        assertEquals("2 run, 1 failed", result.summary());
+        assertEquals("5 run, 1 failed", result.summary());
     }
 }

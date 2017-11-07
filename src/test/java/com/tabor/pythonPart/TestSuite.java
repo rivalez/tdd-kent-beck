@@ -3,7 +3,7 @@ package com.tabor.pythonPart;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestSuite {
+class TestSuite {
 
     List<TestCase> tests;
 

@@ -1,12 +1,14 @@
 package com.tabor.pythonPart;
 
+import static com.tabor.pythonPart.PythonTest.TEST_BROKEN_METHOD;
+
 /**
  * Created by marek on 06.11.2017.
  */
-public class TestCase {
+class TestCase {
 
     boolean wasRun;
-    String name;
+    private String name;
     String log;
 
     TestCase() {
@@ -21,7 +23,7 @@ public class TestCase {
         result.testStarted();
         setUp();
         try {
-            if (name.equals("testBrokenMethod")) {
+            if (name.equals(TEST_BROKEN_METHOD)) {
                 testBrokenMethod();
             } else {
                 testMethod();
