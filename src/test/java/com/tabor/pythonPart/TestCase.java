@@ -1,18 +1,23 @@
 package com.tabor.pythonPart;
 
+import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
+
 /**
  * Created by marek on 06.11.2017.
  */
-public class WasRun {
+public class TestCase {
 
     boolean wasRun;
     String log;
 
-    boolean run(){
+    TestResult run(){
+        TestResult result = new TestResult();
+        result.testStarted();
         setUp();
         testMethod();
         tearDown();
-        return this.wasRun = Boolean.TRUE;
+        this.wasRun = Boolean.TRUE;
+        return result;
     }
 
     boolean setUp() {
@@ -27,6 +32,10 @@ public class WasRun {
 
     void tearDown(){
         this.log = log + "tearDown ";
+    }
+
+    void testBrokenMethod() throws Exception {
+        throw new Exception();
     }
 
 }

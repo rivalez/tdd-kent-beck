@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -13,37 +12,60 @@ import static org.junit.Assert.assertTrue;
  */
 public class PythonTest {
 
-    private WasRun wasRun = new WasRun();
+    private TestCase test = new TestCase();
 
     @Before
     public void setUp() {
-        wasRun = new WasRun();
+        test = new TestCase();
     }
 
     @Test
     public void wasRun(){
-        assertFalse(wasRun.wasRun);
+        assertFalse(test.wasRun);
     }
 
     @Test
         public void testCaseTest(){
-        WasRun wasRun = Mockito.mock(WasRun.class);
-        Mockito.verify(wasRun, Mockito.times(0)).run();
-        wasRun.run();
-        Mockito.verify(wasRun, Mockito.times(1)).run();
+        TestCase test = Mockito.mock(TestCase.class);
+        Mockito.verify(test, Mockito.times(0)).run();
+        test.run();
+        Mockito.verify(test, Mockito.times(1)).run();
     }
 
     @Test
     public void testSetUp(){
-        wasRun.setUp();
-        wasRun.testMethod();
-        assertTrue(wasRun.log.equals("setUp testMethod "));
+        test.setUp();
+        test.testMethod();
+        assertTrue(test.log.equals("setUp testMethod "));
     }
 
     @Test
     public void testTemplateMethod(){
-        wasRun.testMethod();
-        wasRun.run();
-        assertTrue(wasRun.log.equals("setUp testMethod tearDown "));
+        test.testMethod();
+        test.run();
+        assertTrue(test.log.equals("setUp testMethod tearDown "));
     }
+
+    @Test
+    public void testResult() {
+        test.testMethod();
+        TestResult result = test.run();
+        assertTrue("1 run, 0 failed".equals(result.summary()));
+    }
+
+    @Test
+    public void testFailedResult() throws Exception {
+        test.testBrokenMethod();
+        TestResult result = test.run();
+        assertTrue("1 run, 1 failed".equals(result.summary()));
+    }
+
+    @Test
+    public void testFailedResultFormatting() {
+        TestResult result = test.run();
+        result.testStarted();
+        result.testFailed();
+        assertTrue("1 run, 1 failed".equals(result.summary()));
+    }
+
 }
