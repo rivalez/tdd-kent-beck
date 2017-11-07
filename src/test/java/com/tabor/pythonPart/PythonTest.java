@@ -62,10 +62,10 @@ public class PythonTest {
 
     @Test
     public void testFailedResultFormatting() {
-        TestResult result = test.run();
+        TestResult result = new TestResult();
         result.testStarted();
         result.testFailed();
         assertTrue("1 run, 1 failed".equals(result.summary()));
-    }
+        }
 
 }

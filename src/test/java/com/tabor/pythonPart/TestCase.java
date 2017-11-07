@@ -1,7 +1,5 @@
 package com.tabor.pythonPart;
 
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
-
 /**
  * Created by marek on 06.11.2017.
  */
@@ -37,5 +35,4 @@ public class TestCase {
     void testBrokenMethod() throws Exception {
         throw new Exception();
     }
-
 }
